@@ -3,7 +3,9 @@ import {
     Avatar,
     Paper,
     Typography,
-    Card
+    Card,
+    List,
+    Grid
 } from '@material-ui/core';
 import Image from 'material-ui-image';
 
@@ -20,27 +22,25 @@ class UserPhotos extends React.Component {
 
     render() {
         return (
-            <div>
+            <Grid 
+            container 
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            style={{ minHeight: '100vh' }}>
             {
                 window.cs142models.photoOfUserModel(this.props.match.params.userId).map(photo => 
-                    <Card key={photo._id} variant="outlined">
-                        <Image src={`/images/${photo.file_name}`}  />
-                    </Card>
+                    <Grid 
+                    item 
+                    key={photo._id}>
+                        <img src={`/images/${photo.file_name}`} style={{
+                            height: 250
+                            // TODO: Maybe put this into separate stylesheet
+                        }}/>
+                    </Grid>
                 )
             }
-            
-            {/*<Typography variant="body1">
-                This should be the UserPhotos view of the PhotoShare app. Since
-                it is invoked from React Router the params from the route will be
-                in property match. So this should show details of user:
-                {this.props.match.params.userId}. You can fetch the model for the user from
-                window.cs142models.photoOfUserModel(userId):
-                <Typography variant="caption">
-                    {JSON.stringify(window.cs142models.photoOfUserModel(this.props.match.params.userId))}
-                </Typography>
-            </Typography>
-        */}
-        </div>
+            </Grid>
         );
     }
 }
