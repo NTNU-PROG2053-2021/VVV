@@ -1,7 +1,12 @@
 import React from 'react';
 import {
-    Typography
+    Avatar,
+    Paper,
+    Typography,
+    Card
 } from '@material-ui/core';
+import Image from 'material-ui-image';
+
 import './userPhotos.css';
 
 
@@ -18,9 +23,9 @@ class UserPhotos extends React.Component {
             <div>
             {
                 window.cs142models.photoOfUserModel(this.props.match.params.userId).map(photo => 
-                    <div key={photo._id}>
-                        <img src={`/images/${photo.file_name}`} alt="Image did not load!" />
-                    </div>
+                    <Card key={photo._id} variant="outlined">
+                        <Image src={`/images/${photo.file_name}`}  />
+                    </Card>
                 )
             }
             
