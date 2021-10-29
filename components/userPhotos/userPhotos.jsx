@@ -10,7 +10,7 @@ import {
 import Image from 'material-ui-image';
 
 import './userPhotos.css';
-
+import Comment from '../comment/Comment'
 
 /**
  * Define UserPhotos, a React componment of CS142 project #5
@@ -37,6 +37,11 @@ class UserPhotos extends React.Component {
                         <Card>
                             <img src={`/images/${photo.file_name}`}/>
                             <p>{photo.date_time}</p>
+                            {
+                                photo.comments.map(comment =>
+                                    <Comment text={comment.comment} />
+                                )
+                            }
                         </Card>
                     </Grid>
                 )
