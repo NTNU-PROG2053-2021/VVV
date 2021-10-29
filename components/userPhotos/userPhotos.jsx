@@ -24,7 +24,7 @@ class UserPhotos extends React.Component {
         return (
             <Grid 
             container 
-            spacing={0}
+            spacing={5}
             direction="column"
             alignItems="center"
             style={{ minHeight: '100vh' }}>
@@ -32,11 +32,12 @@ class UserPhotos extends React.Component {
                 window.cs142models.photoOfUserModel(this.props.match.params.userId).map(photo => 
                     <Grid 
                     item 
-                    key={photo._id}>
-                        <img src={`/images/${photo.file_name}`} style={{
-                            height: 250
-                            // TODO: Maybe put this into separate stylesheet
-                        }}/>
+                    key={photo._id}
+                    className="userPhotosGridItem">
+                        <Card>
+                            <img src={`/images/${photo.file_name}`}/>
+                            <p>{photo.date_time}</p>
+                        </Card>
                     </Grid>
                 )
             }
