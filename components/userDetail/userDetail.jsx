@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {
-    Divider,
-    Typography
-} from '@material-ui/core';
+import React from 'react';
+import { Divider } from '@material-ui/core';
 import './userDetail.css';
 
 /**
