@@ -36,7 +36,7 @@ class UserList extends React.Component {
                         )
                     }
                 </List>
-            </div >
+            </div>
         );
     }
 }

@@ -11,12 +11,20 @@ import './userPhotos.css';
 class UserPhotos extends React.Component {
     constructor(props) {
         super(props);
-
     }
 
     render() {
         return (
-            <Typography variant="body1">
+            <div>
+            {
+                window.cs142models.photoOfUserModel(this.props.match.params.userId).map(photo => 
+                    <div key={photo._id}>
+                        <img src={`/images/${photo.file_name}`} alt="Image did not load!" />
+                    </div>
+                )
+            }
+            
+            {/*<Typography variant="body1">
                 This should be the UserPhotos view of the PhotoShare app. Since
                 it is invoked from React Router the params from the route will be
                 in property match. So this should show details of user:
@@ -26,7 +34,8 @@ class UserPhotos extends React.Component {
                     {JSON.stringify(window.cs142models.photoOfUserModel(this.props.match.params.userId))}
                 </Typography>
             </Typography>
-
+        */}
+        </div>
         );
     }
 }
