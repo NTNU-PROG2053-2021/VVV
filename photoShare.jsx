@@ -48,10 +48,20 @@ class PhotoShare extends React.Component {
                                             </Typography>}
                                     />
                                     <Route path="/users/:userId"
-                                        render={props => <UserDetail {...props} />}
+                                        render={props =>
+                                            <div>
+                                                <UserDetail {...props} />
+                                                <TopBar {...props} />
+                                            </div>
+                                        }
                                     />
                                     <Route path="/photos/:userId"
-                                        render={props => <UserPhotos {...props} />}
+                                        render={props =>
+                                            <div>
+                                                <UserPhotos {...props} />
+                                                <TopBar {...props} />
+                                            </div>
+                                        }
                                     />
                                     <Route path="/users" component={UserList} />
                                 </Switch>
