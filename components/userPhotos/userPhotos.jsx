@@ -33,8 +33,7 @@ class UserPhotos extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-        };
+        this.state = {};
     }
 
     toggleCollapse(index) {

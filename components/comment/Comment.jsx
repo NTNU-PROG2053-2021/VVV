@@ -5,7 +5,7 @@ import {
 import './Comment.css';
 import { Link } from 'react-router-dom';
 
-export const Comment = ({ text, date_time, user }) => {
+const Comment = ({ text, date_time, user }) => {
     return (
         <Card variant="outlined">
             <CardContent>
@@ -25,3 +25,5 @@ export const Comment = ({ text, date_time, user }) => {
         </Card>
     )
 }
+
+export default Comment;
