@@ -66,17 +66,15 @@ class UserPhotos extends React.Component {
                             </CardActions>
                             <Collapse in={this.state[index]} timeout="auto" unmountOnExit>
                                 <CardContent>
-                                    <p>COMMENTS</p>
+                                    {
+                                        photo.comments ? (
+                                            photo.comments.map(comment => (
+                                                <Comment key={comment._id} text={comment.comment} />
+                                            )
+                                        )) : <Typography>No comments yet. Be the first to comment :)</Typography>
+                                    }
                                 </CardContent>
                             </Collapse>
-
-                            {/*<img src={}/>
-                            <p>{photo.date_time}</p>
-                            {
-                                photo.comments.map(comment =>
-                                    <Comment text={comment.comment} />
-                                )
-                            }*/}
                         </Card>
                     )
                 }
