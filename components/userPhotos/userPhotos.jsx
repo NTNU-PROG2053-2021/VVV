@@ -41,8 +41,6 @@ class UserPhotos extends React.Component {
         this.setState({ [index]: !this.state[index] });
     }
 
-
-
     render() {
         return (
             <div className="userPhotosContainer">
@@ -69,9 +67,14 @@ class UserPhotos extends React.Component {
                                     {
                                         photo.comments ? (
                                             photo.comments.map(comment => (
-                                                <Comment key={comment._id} text={comment.comment} />
+                                                <Comment
+                                                    key={comment._id}
+                                                    text={comment.comment}
+                                                    user={comment.user}
+                                                    date_time={comment.date_time}
+                                                />
                                             )
-                                        )) : <Typography>No comments yet. Be the first to comment :)</Typography>
+                                            )) : <Typography>No comments yet :)</Typography>
                                     }
                                 </CardContent>
                             </Collapse>
