@@ -1,5 +1,5 @@
 import React from 'react';
-import { 
+import {
     Divider,
     Button,
     Box
@@ -40,9 +40,7 @@ class UserDetail extends React.Component {
                 </p>
                 <Divider />
                 <Box mt="10px">
-                    <Link>
-                        <Button component={Link} to={`/photos/${this.state.user._id}`} variant="contained">My images</Button>
-                    </Link>
+                    <Button component={Link} to={`/photos/${this.state.user._id}`} variant="contained">My images</Button>
                 </Box>
             </div>
         );
