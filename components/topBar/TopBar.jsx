@@ -12,26 +12,42 @@ class TopBar extends React.Component {
         super(props);
 
         this.state = {
-            user: "",
             display: "",
-            currentPage: "",
         }
     }
 
+    // when component loads, try to update display
+    componentDidMount() {
+        this.updateDisplay(this.props)
+    }
+
+    // when component updates, check if new data is different
+    // and try to update if the data is different
     componentDidUpdate(prevProps) {
         if (this.props !== prevProps) {
-            this.setState({
-                user: window.cs142models.userModel(this.props.match.params.userId),
-                currentPage: this.props.match.path
-            }, this.updateDisplay)
+            this.updateDisplay(this.props)
         }
     }
 
-    updateDisplay() {
-        if (this.state.currentPage.startsWith("/user")) {
-            this.setState({ display: this.state.user.first_name + " " + this.state.user.last_name })
-        } else if (this.state.currentPage.startsWith("/photos")) {
-            this.setState({ display: "Photos of " + this.state.user.first_name + " " + this.state.user.last_name })
+    updateDisplay(props) {
+        // check if props is empty
+        if (props.match) {
+
+            // get user details
+            var user = window.cs142models.userModel(props.match.params.userId)
+
+            // check if user page or photos page
+            if (this.props.match.path.startsWith("/user")) {
+                // update display
+                this.setState({
+                    display: user.first_name + " " + user.last_name
+                })
+            } else if (this.props.match.path.startsWith("/photos")) {
+                // update display
+                this.setState({
+                    display: "Photos of " + user.first_name + " " + user.last_name
+                })
+            }
         }
     }
 
