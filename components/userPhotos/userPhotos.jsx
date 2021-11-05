@@ -1,23 +1,15 @@
 import React from 'react';
 import {
-    Avatar,
-    Paper,
     Typography,
     Card,
-    List,
-    Grid,
     CardHeader,
     CardMedia,
     Collapse,
     CardActions,
     IconButton,
     CardContent,
-    Button,
-    Container
 } from '@material-ui/core';
-import Image from 'material-ui-image';
 
-import { withStyles, createStyles } from '@material-ui/core';
 
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -56,7 +48,7 @@ class UserPhotos extends React.Component {
                                 alt={"Could not display photo!"}
                             />
                             <CardActions>
-                                <IconButton onClick={(e) => this.toggleCollapse(index)}>
+                                <IconButton onClick={() => this.toggleCollapse(index)}>
                                     <Typography>Comments</Typography>
                                     {this.state[index] ? < ExpandLessIcon /> : <ExpandMoreIcon />}
                                 </IconButton>
