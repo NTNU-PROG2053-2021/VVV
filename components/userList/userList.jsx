@@ -23,7 +23,7 @@ class UserList extends React.Component {
         }
 
         fetchModel("/user/list")
-        .then(data => this.setState({users: data}))
+            .then(data => this.setState({ users: data }))
     }
 
     render() {
