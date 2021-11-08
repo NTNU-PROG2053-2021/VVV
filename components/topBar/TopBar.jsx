@@ -42,15 +42,16 @@ class TopBar extends React.Component {
                     if (this.props.match.path.startsWith("/user")) {
                         // update display
                         this.setState({
-                            display: user.first_name + " " + user.last_name
+                            display: user.data.first_name + " " + user.data.last_name
                         })
                     } else if (this.props.match.path.startsWith("/photos")) {
                         // update display
                         this.setState({
-                            display: "Photos of " + user.first_name + " " + user.last_name
+                            display: "Photos of " + user.data.first_name + " " + user.data.last_name
                         })
                     }
                 })
+                .catch(error => console.error(error))
         }
     }
 
