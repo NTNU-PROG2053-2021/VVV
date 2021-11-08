@@ -6,6 +6,7 @@ import {
 } from '@material-ui/core';
 import './userDetail.css';
 import { Link } from "react-router-dom";
+import fetchModel from '../../lib/fetchModelData';
 
 
 /**
@@ -16,16 +17,35 @@ class UserDetail extends React.Component {
         super(props);
 
         this.state = {
-            user: window.cs142models.userModel(this.props.match.params.userId),
+            user: {
+                _id: 0,
+                first_name: "",
+                last_name: "",
+                description: "",
+                occupation: "",
+                location: ""
+            },
         }
+    }
+
+    componentDidMount () {
+        this.updateDisplay()
     }
 
     componentDidUpdate(prevProps) {
         // compare old id with new id to find out if state should be updated
         if (this.props.match.params.userId !== prevProps.match.params.userId) {
             // new user id, so update state to show correct data
-            this.setState({ user: window.cs142models.userModel(this.props.match.params.userId) })
+            //this.setState({ user: window.cs142models.userModel() })
+
+            this.updateDisplay();
         }
+    }
+
+    updateDisplay () {
+        fetchModel(`/user/${this.props.match.params.userId}`)
+            .then(data => this.setState({user: data}))
+            .catch(error => console.error(error))
     }
 
 
