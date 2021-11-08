@@ -19,7 +19,7 @@
     "file-loader": "^3.0.1",
     "js-yaml": "^3.13.1",
     "material-ui-image": "^3.3.2",
-    "promise": "^8.0.2",
+    "promise": "^8.1.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-router": "^5.1.2",
