@@ -28,7 +28,7 @@ class UserDetail extends React.Component {
         }
     }
 
-    componentDidMount () {
+    componentDidMount() {
         this.updateDisplay()
     }
 
@@ -42,9 +42,9 @@ class UserDetail extends React.Component {
         }
     }
 
-    updateDisplay () {
+    updateDisplay() {
         fetchModel(`/user/${this.props.match.params.userId}`)
-            .then(data => this.setState({user: data}))
+            .then(data => this.setState({ user: data.data }))
             .catch(error => console.error(error))
     }
 
