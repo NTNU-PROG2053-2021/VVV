@@ -3,6 +3,7 @@ import {
     AppBar, Toolbar, Typography, Box
 } from '@material-ui/core';
 import './TopBar.css';
+import fetchModel from '../../lib/fetchModelData';
 
 /**
  * Define TopBar, a React componment of CS142 project #5
@@ -34,20 +35,22 @@ class TopBar extends React.Component {
         if (props.match) {
 
             // get user details
-            var user = window.cs142models.userModel(props.match.params.userId)
-
-            // check if user page or photos page
-            if (this.props.match.path.startsWith("/user")) {
-                // update display
-                this.setState({
-                    display: user.first_name + " " + user.last_name
+            //var user = window.cs142models.userModel(props.match.params.userId)
+            fetchModel(`/user/${props.match.params.userId}`)
+                .then(user => {
+                    // check if user page or photos page
+                    if (this.props.match.path.startsWith("/user")) {
+                        // update display
+                        this.setState({
+                            display: user.first_name + " " + user.last_name
+                        })
+                    } else if (this.props.match.path.startsWith("/photos")) {
+                        // update display
+                        this.setState({
+                            display: "Photos of " + user.first_name + " " + user.last_name
+                        })
+                    }
                 })
-            } else if (this.props.match.path.startsWith("/photos")) {
-                // update display
-                this.setState({
-                    display: "Photos of " + user.first_name + " " + user.last_name
-                })
-            }
         }
     }
 

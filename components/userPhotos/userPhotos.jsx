@@ -31,7 +31,7 @@ class UserPhotos extends React.Component {
         };
 
         fetchModel(`/photosOfUser/${this.props.match.params.userId}`)
-        .then(data => this.setState({photos: data}))
+            .then(data => this.setState({ photos: data }))
     }
 
     toggleCollapse(index) {
