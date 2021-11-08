@@ -17,6 +17,7 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
 import './userPhotos.css';
 import Comment from '../comment/Comment'
+import fetchModel from '../../lib/fetchModelData';
 
 /**
  * Define UserPhotos, a React componment of CS142 project #5
@@ -25,7 +26,12 @@ class UserPhotos extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {};
+        this.state = {
+            photos: [],
+        };
+
+        fetchModel(`/photosOfUser/${this.props.match.params.userId}`)
+        .then(data => this.setState({photos: data}))
     }
 
     toggleCollapse(index) {
@@ -36,7 +42,7 @@ class UserPhotos extends React.Component {
         return (
             <div className="userPhotosContainer">
                 {
-                    window.cs142models.photoOfUserModel(this.props.match.params.userId).map((photo, index) =>
+                    this.state.photos.map((photo, index) =>
                         <Card key={photo._id} variant="outlined">
                             <CardHeader
                                 title={photo.file_name}
