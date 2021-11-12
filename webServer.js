@@ -139,14 +139,15 @@ app.get('/user/list', function (request, response) {
  * URL /user/:id - Return the information for User (id)
  */
 app.get('/user/:id', function (request, response) {
-    var id = request.params.id;
-    var user = cs142models.userModel(id);
-    if (user === null) {
-        console.log('User with _id:' + id + ' not found.');
-        response.status(400).send('Not found');
-        return;
-    }
-    response.status(200).send(user);
+    var param = request.params.id;
+
+    User.findById(param, `-__v`, function (err, user) {
+        if (err) {
+            response.status(400).send()
+            return;
+        }
+        response.status(200).send(user)
+    })
 });
 
 /*
