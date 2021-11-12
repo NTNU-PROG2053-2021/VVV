@@ -99,9 +99,9 @@ app.get('/test/:p1', function (request, response) {
         // do the work.  We put the collections into array and use async.each to
         // do each .count() query.
         var collections = [
-            {name: 'user', collection: User},
-            {name: 'photo', collection: Photo},
-            {name: 'schemaInfo', collection: SchemaInfo}
+            { name: 'user', collection: User },
+            { name: 'photo', collection: Photo },
+            { name: 'schemaInfo', collection: SchemaInfo }
         ];
         async.each(collections, function (col, done_callback) {
             col.collection.countDocuments({}, function (err, count) {
@@ -130,7 +130,9 @@ app.get('/test/:p1', function (request, response) {
  * URL /user/list - Return all the User object.
  */
 app.get('/user/list', function (request, response) {
-    response.status(200).send(cs142models.userListModel());
+    User.find({}, 'first_name last_name').then(function (users) {
+        response.status(200).send(users)
+    })
 });
 
 /*
