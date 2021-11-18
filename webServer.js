@@ -162,28 +162,28 @@ app.get('/photosOfUser/:id', function (request, response) {
             response.status(400).send();
         } else {
             // Make deep copy of photos array so that we can modify values
-            let test = JSON.parse(JSON.stringify(photos))
+            let photosCopy = JSON.parse(JSON.stringify(photos))
 
-            test.map (photo => {
-                photo.comments.map (comment => {
+            async.each (photosCopy, function (photo, photoCallback) {
+                async.each(photo.comments, function (comment, commentCallback) {
                     comment.photo_id = photo._id
 
-                    User.findById(photo.user_id, '', function (err, user) {
+                    User.findById(comment.user_id, '-__v', function (err, user) {
                         comment.user = user
-                        response.status(200).send(test)
+                        commentCallback(err)
                     })
+                }, function (err) {
+                    photoCallback(err)
                 })
+            }, function (err) {
+                if (err) {
+                    response.status(500).send(JSON.stringify(err));
+                } else {
+                    response.status(200).send(photosCopy)
+                }
             })
         }
     })
-
-    /* var photos = cs142models.photoOfUserModel(id);
-    if (photos.length === 0) {
-        console.log('Photos for user with _id:' + id + ' not found.');
-        response.status(400).send('Not found');
-        return;
-    }
-    response.status(200).send(photos); */
 });
 
 
