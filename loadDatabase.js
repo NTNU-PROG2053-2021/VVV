@@ -26,7 +26,7 @@ var cs142models = require('./modelData/photoApp.js').cs142models;
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
-mongoose.connect('mongodb://localhost/cs142project6', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://mongo/cs142project6', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Load the Mongoose schema for Use and Photo
 var User = require('./schema/user.js');

@@ -47,7 +47,7 @@ var app = express();
 // XXX - Your submission should work without this line. Comment out or delete this line for tests and before submission!
 var cs142models = require('./modelData/photoApp.js').cs142models;
 
-mongoose.connect('mongodb://localhost/cs142project6', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://mongo/cs142project6', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // We have the express static module (http://expressjs.com/en/starter/static-files.html) do all
 // the work for us.
@@ -146,6 +146,7 @@ app.get('/user/:id', function (request, response) {
             response.status(400).send()
             return;
         }
+        
         response.status(200).send(user)
     })
 });
@@ -155,13 +156,34 @@ app.get('/user/:id', function (request, response) {
  */
 app.get('/photosOfUser/:id', function (request, response) {
     var id = request.params.id;
-    var photos = cs142models.photoOfUserModel(id);
+
+    Photo.find({user_id: { $eq: id}}, '-__v').then(function (photos, err) {
+        if (err) {
+            response.status(400).send();
+        } else {
+            // Make deep copy of photos array so that we can modify values
+            let test = JSON.parse(JSON.stringify(photos))
+
+            test.map (photo => {
+                photo.comments.map (comment => {
+                    comment.photo_id = photo._id
+
+                    User.findById(photo.user_id, '', function (err, user) {
+                        comment.user = user
+                        response.status(200).send(test)
+                    })
+                })
+            })
+        }
+    })
+
+    /* var photos = cs142models.photoOfUserModel(id);
     if (photos.length === 0) {
         console.log('Photos for user with _id:' + id + ' not found.');
         response.status(400).send('Not found');
         return;
     }
-    response.status(200).send(photos);
+    response.status(200).send(photos); */
 });
 
 
